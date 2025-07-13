@@ -1,0 +1,65 @@
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+proxy-groups:
+  - name: Proxies
+    type: select
+    proxies:
+      - 节点示例1
+      - 节点示例2
+
+  - name: Netflix
+    type: select
+    proxies:
+      - 节点示例1
+      - 节点示例2
+
+  - name: YouTube
+    type: select
+    proxies:
+      - 节点示例1
+      - 节点示例2
+
+  - name: Telegram
+    type: select
+    proxies:
+      - 节点示例1
+      - 节点示例2
+
+  - name: AI
+    type: select
+    proxies:
+      - 节点示例1
+      - 节点示例2
+
+rules:
+  # Netflix
+  - DOMAIN-SUFFIX,netflix.com,Netflix
+  - DOMAIN-SUFFIX,nflxvideo.net,Netflix
+  - DOMAIN-SUFFIX,nflximg.net,Netflix
+  - DOMAIN-SUFFIX,netflixdnstest0.com,Netflix
+  - DOMAIN-KEYWORD,netflix,Netflix
+
+  # YouTube
+  - DOMAIN-SUFFIX,youtube.com,YouTube
+  - DOMAIN-SUFFIX,googlevideo.com,YouTube
+  - DOMAIN-SUFFIX,ytimg.com,YouTube
+  - DOMAIN-KEYWORD,youtube,YouTube
+
+  # Telegram
+  - DOMAIN-SUFFIX,t.me,Telegram
+  - DOMAIN-SUFFIX,telegram.org,Telegram
+
+  # OpenAI / ChatGPT
+  - DOMAIN-SUFFIX,openai.com,AI
+  - DOMAIN-SUFFIX,chat.openai.com,AI
+  - DOMAIN-SUFFIX,api.openai.com,AI
+  - DOMAIN-SUFFIX,auth0.com,AI
+  - DOMAIN-KEYWORD,openai,AI
+
+  # Default
+  - GEOIP,CN,DIRECT
+  - MATCH,Proxies

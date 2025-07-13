@@ -1,0 +1,81 @@
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+proxy-groups:
+  - name: Proxy
+    type: select
+    proxies:
+      - DIRECT
+      - ✈️ 自动节点
+      - ♻️ 自动负载均衡
+
+  - name: Apple
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+
+  - name: Intelligence
+    type: select
+    proxies:
+      - Proxy
+
+  - name: Telegram
+    type: select
+    proxies:
+      - Proxy
+
+  - name: Netflix
+    type: select
+    proxies:
+      - Proxy
+
+  - name: Disney+
+    type: select
+    proxies:
+      - Proxy
+
+  - name: YouTube
+    type: select
+    proxies:
+      - Proxy
+
+  - name: Spotify
+    type: select
+    proxies:
+      - Proxy
+
+  - name: TikTok
+    type: select
+    proxies:
+      - Proxy
+
+  - name: BiliBili
+    type: select
+    proxies:
+      - DIRECT
+      - Proxy
+
+rules:
+  - DOMAIN-SUFFIX,apple.com,Apple
+  - DOMAIN-SUFFIX,icloud.com,Apple
+  - DOMAIN-SUFFIX,openai.com,Intelligence
+  - DOMAIN-SUFFIX,chat.openai.com,Intelligence
+  - DOMAIN-SUFFIX,telegram.org,Telegram
+  - DOMAIN-SUFFIX,t.me,Telegram
+  - DOMAIN-SUFFIX,netflix.com,Netflix
+  - DOMAIN-SUFFIX,nflxvideo.net,Netflix
+  - DOMAIN-SUFFIX,disneyplus.com,Disney+
+  - DOMAIN-KEYWORD,youtube,YouTube
+  - DOMAIN-SUFFIX,googlevideo.com,YouTube
+  - DOMAIN-SUFFIX,ytimg.com,YouTube
+  - DOMAIN-SUFFIX,spotify.com,Spotify
+  - DOMAIN-KEYWORD,tiktok,TikTok
+  - DOMAIN-SUFFIX,tiktokcdn.com,TikTok
+  - DOMAIN-SUFFIX,bilibili.com,BiliBili
+  - DOMAIN-SUFFIX,biliapi.com,BiliBili
+  - GEOIP,CN,DIRECT
+  - MATCH,Proxy

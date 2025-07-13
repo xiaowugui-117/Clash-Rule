@@ -1,0 +1,47 @@
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+proxy-groups:
+  - name: Proxies
+    type: select
+    proxies:
+      - DIRECT
+      # 请在此处添加你的实际节点名称，如 HKG05 香港、USA06 美国 等
+      - 节点示例1
+      - 节点示例2
+
+  - name: Netflix
+    type: select
+    proxies:
+      - Proxies
+
+  - name: YouTube
+    type: select
+    proxies:
+      - Proxies
+
+  - name: Telegram
+    type: select
+    proxies:
+      - Proxies
+
+  - name: AI
+    type: select
+    proxies:
+      - Proxies
+
+rules:
+  - DOMAIN-SUFFIX,netflix.com,Netflix
+  - DOMAIN-SUFFIX,nflxvideo.net,Netflix
+  - DOMAIN-SUFFIX,youtube.com,YouTube
+  - DOMAIN-SUFFIX,googlevideo.com,YouTube
+  - DOMAIN-SUFFIX,t.me,Telegram
+  - DOMAIN-SUFFIX,telegram.org,Telegram
+  - DOMAIN-SUFFIX,openai.com,AI
+  - DOMAIN-SUFFIX,chat.openai.com,AI
+  - DOMAIN-SUFFIX,api.openai.com,AI
+  - GEOIP,CN,DIRECT
+  - MATCH,Proxies

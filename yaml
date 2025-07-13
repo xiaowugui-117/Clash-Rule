@@ -7,7 +7,7 @@ external-controller: 127.0.0.1:9090
 proxy-providers:
   topnan:
     type: http
-    url: "https://topnan.tech/dandannie/31147bd2-1590-4031-940d-f4a52721519f"
+    url: ""
     interval: 3600
     path: ./providers/topnan.yaml
     health-check:
